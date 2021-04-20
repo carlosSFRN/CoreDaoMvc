@@ -1,0 +1,33 @@
+﻿@model ApnCore_Crud.Models.Time
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+<h2>Deletar</h2>
+
+<h3>Deseja deletar este time ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Retorna para a Lista</a>
+    </form>
+</div>

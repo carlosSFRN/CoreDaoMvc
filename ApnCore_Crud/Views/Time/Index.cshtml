@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ApnCore_Crud.Models.Time>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<p>
+    <a asp-action="Create">Criar Novo Time</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+            
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id=item.idTime }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id=item.idTime }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id=item.idTime })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
