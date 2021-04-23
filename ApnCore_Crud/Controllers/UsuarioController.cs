@@ -6,19 +6,19 @@ using System.Linq;
 
 namespace ApnCore_Crud.Controllers
 {
-    public class TimeController : Controller
+    public class UsuarioController : Controller
     {
-        private readonly ITimeRepository timeDAO;
-        public TimeController(ITimeRepository _funcionario)
+        private readonly IUsuarioRepository _contextDAO;
+        public UsuarioController(IUsuarioRepository contextDAO)
         {
-            timeDAO = _funcionario;
+            _contextDAO = contextDAO;
         }
 
         public IActionResult Index()
         {
-            List<Time> listaTime = timeDAO.GetAll().ToList();
+            List<Usuario> listaUsuario = _contextDAO.GetAll().ToList();
 
-            return View(listaTime);
+            return View(listaUsuario);
         }
 
         [HttpGet]
@@ -29,13 +29,13 @@ namespace ApnCore_Crud.Controllers
                 return NotFound();
             }
 
-            Time time = timeDAO.Get(id);
+            Usuario usuario = _contextDAO.Get(id);
 
-            if (time == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(time);
+            return View(usuario);
         }
 
         [HttpGet]
@@ -46,14 +46,14 @@ namespace ApnCore_Crud.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind] Time time)
+        public IActionResult Create([Bind] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                timeDAO.Add(time);
+                _contextDAO.Add(usuario);
                 return RedirectToAction("Index");
             }
-            return View(time);
+            return View(usuario);
         }
 
         [HttpGet]
@@ -63,29 +63,29 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
-            Time time = timeDAO.Get(id);
+            Usuario usuario = _contextDAO.Get(id);
 
-            if (time == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(time);
+            return View(usuario);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind]Time time)
+        public IActionResult Edit(int id, [Bind] Usuario usuario)
         {
-            if (id != time.idTime)
+            if (id != usuario.idUsuario)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                timeDAO.Update(time);
+                _contextDAO.Edit(usuario);
                 return RedirectToAction("Index");
             }
-            return View(time);
+            return View(usuario);
         }
 
         [HttpGet]
@@ -95,21 +95,23 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
-            Time time = timeDAO.Get(id);
+            Usuario usuario = _contextDAO.Get(id);
 
-            if (time == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(time);
+            return View(usuario);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
         {
-            timeDAO.Delete(id);
+            _contextDAO.Delete(id);
             return RedirectToAction("Index");
         }
+
+
     }
 }

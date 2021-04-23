@@ -1,0 +1,33 @@
+﻿@model ApnCore_Crud.Models.Estabelecimento
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+<h2>Deletar</h2>
+
+<h3>Deseja deletar este time ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idEstabelecimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idEstabelecimento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeEstabelecimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NomeEstabelecimento)
+        </dd>
+        
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-success" /> |
+        <a asp-action="Index">Retorna para a Lista</a>
+    </form>
+</div>

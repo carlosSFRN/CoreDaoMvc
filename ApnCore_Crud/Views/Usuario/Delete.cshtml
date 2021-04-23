@@ -1,4 +1,4 @@
-﻿@model ApnCore_Crud.Models.Time
+﻿@model ApnCore_Crud.Models.Usuario
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,23 +11,23 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.idTime)
+            @Html.DisplayNameFor(model => model.idUsuario)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.idTime)
+            @Html.DisplayFor(model => model.idUsuario)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.NomeUsuario)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.NomeUsuario)
         </dd>
         
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <input type="submit" value="Delete" class="btn btn-success" /> |
         <a asp-action="Index">Retorna para a Lista</a>
     </form>
 </div>

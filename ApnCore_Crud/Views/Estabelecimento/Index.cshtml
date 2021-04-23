@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ApnCore_Crud.Models.Estabelecimento>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<p>
+    <a class="btn btn-primary" asp-action="Create">Adicionar Estabelecimento</a>
+</p>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeEstabelecimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uf)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeEstabelecimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Uf)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idEstabelecimento }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.idEstabelecimento }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.idEstabelecimento })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
