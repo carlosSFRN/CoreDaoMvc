@@ -29,7 +29,7 @@ namespace ApnCore_Crud.Controllers
                 return NotFound();
             }
 
-            Usuario usuario = _contextDAO.Get(id);
+            Usuario usuario = _contextDAO.GetId(id);
 
             if (usuario == null)
             {
@@ -63,7 +63,7 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
-            Usuario usuario = _contextDAO.Get(id);
+            Usuario usuario = _contextDAO.GetId(id);
 
             if (usuario == null)
             {
@@ -76,7 +76,7 @@ namespace ApnCore_Crud.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind] Usuario usuario)
         {
-            if (id != usuario.idUsuario)
+            if (id != usuario.IdUsuario)
             {
                 return NotFound();
             }
@@ -95,7 +95,7 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
-            Usuario usuario = _contextDAO.Get(id);
+            Usuario usuario = _contextDAO.GetId(id);
 
             if (usuario == null)
             {

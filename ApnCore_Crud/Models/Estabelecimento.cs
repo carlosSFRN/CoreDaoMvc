@@ -6,7 +6,7 @@ namespace ApnCore_Crud.Models
     [Table("Estabelecimento")]
     public class Estabelecimento
     {
-        public int idEstabelecimento { get; set; }
+        public int IdEstabelecimento { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório 'Nome Estabelecimento' ")]
         [StringLength(200)]

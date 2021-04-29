@@ -4,13 +4,13 @@ using ApnCore_Crud.Repository.Interface;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using ApnCore_Crud.Data;
 
 namespace ApnCore_Crud.Repository
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        const string connectionString = @"Server=DESKTOP-29H7J25\SQLEXPRESS;Database=Stoke;Trusted_Connection=True;";
-        //ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private readonly string connectionString = DataContext.GetConnection();
 
         public IEnumerable<Usuario> GetAll()
         {
@@ -31,7 +31,7 @@ namespace ApnCore_Crud.Repository
                 {
                     Usuario usuario = new Usuario
                     {
-                        idUsuario = Convert.ToInt32(rdr["idUsuario"]),
+                        IdUsuario = Convert.ToInt32(rdr["IdUsuario"]),
                         NomeUsuario = rdr["NomeUsuario"].ToString(),
                         Cpf = rdr["Cpf"].ToString(),
                         Email = rdr["Email"].ToString(),
@@ -75,7 +75,7 @@ namespace ApnCore_Crud.Repository
                     CommandTimeout = 60
                 };
 
-                cmd.Parameters.AddWithValue("@idUsuario", usuario.idUsuario);
+                cmd.Parameters.AddWithValue("@idUsuario", usuario.IdUsuario);
                 cmd.Parameters.AddWithValue("@NomeUsuario", usuario.NomeUsuario);
                 cmd.Parameters.AddWithValue("@Cpf", usuario.Cpf);
                 cmd.Parameters.AddWithValue("@Email", usuario.Email);
@@ -87,7 +87,7 @@ namespace ApnCore_Crud.Repository
             }
         }
 
-        public Usuario Get(int? id)
+        public Usuario GetId(int? id)
         {
             Usuario usuario = new Usuario();
 
@@ -99,20 +99,19 @@ namespace ApnCore_Crud.Repository
                     CommandTimeout = 60
                 };
 
+                cmd.Parameters.AddWithValue("@IdUsuario", id);
+                cmd.Parameters.AddWithValue("@TipoConsulta", "PorId");
+
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    if (id == Convert.ToInt32(rdr["idUsuario"]))
-                    {
-                        usuario.idUsuario = Convert.ToInt32(rdr["idUsuario"]);
-                        usuario.NomeUsuario = rdr["NomeUsuario"].ToString();
-                        usuario.Cpf = rdr["Cpf"].ToString();
-                        usuario.Email = rdr["Email"].ToString();
-                        usuario.Telefone = rdr["Telefone"].ToString();
-                        break;
-                    }
+                    usuario.IdUsuario = Convert.ToInt32(rdr["IdUsuario"]);
+                    usuario.NomeUsuario = rdr["NomeUsuario"].ToString();
+                    usuario.Cpf = rdr["Cpf"].ToString();
+                    usuario.Email = rdr["Email"].ToString();
+                    usuario.Telefone = rdr["Telefone"].ToString();
                 }
             }
             return usuario;

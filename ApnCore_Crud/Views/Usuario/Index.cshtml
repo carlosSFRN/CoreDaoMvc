@@ -11,7 +11,7 @@
     <thead class="thead-light">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.idUsuario)
+                @Html.DisplayNameFor(model => model.IdUsuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NomeUsuario)
@@ -34,7 +34,7 @@
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.idUsuario)
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
                 </td> 
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeUsuario)
@@ -50,9 +50,9 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario }) |
-                    @Html.ActionLink("Detalhes", "Details", new { id = item.idUsuario }) |
-                    @Html.ActionLink("Deletar", "Delete", new { id = item.idUsuario })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.IdUsuario }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.IdUsuario })
                 </td>
             </tr>
         }

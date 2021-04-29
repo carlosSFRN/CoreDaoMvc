@@ -29,7 +29,7 @@ namespace ApnCore_Crud.Controllers
                 return NotFound();
             }
 
-            Estabelecimento estabelecimento = _contextDAO.Get(id);
+            Estabelecimento estabelecimento = _contextDAO.GetId(id);
 
             if (estabelecimento == null)
             {
@@ -63,7 +63,7 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
-            Estabelecimento estabelecimento = _contextDAO.Get(id);
+            Estabelecimento estabelecimento = _contextDAO.GetId(id);
 
             if (estabelecimento == null)
             {
@@ -76,7 +76,7 @@ namespace ApnCore_Crud.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind]Estabelecimento estabelecimento)
         {
-            if (id != estabelecimento.idEstabelecimento)
+            if (id != estabelecimento.IdEstabelecimento)
             {
                 return NotFound();
             }
@@ -95,7 +95,7 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
-            Estabelecimento estabelecimento = _contextDAO.Get(id);
+            Estabelecimento estabelecimento = _contextDAO.GetId(id);
 
             if (estabelecimento == null)
             {

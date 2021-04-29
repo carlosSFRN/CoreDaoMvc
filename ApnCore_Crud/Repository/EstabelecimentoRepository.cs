@@ -7,13 +7,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using ApnCore_Crud.Data;
 
 namespace ApnCore_Crud.Repository
 {
     public class EstabelecimentoRepository : IEstabelecimentoRepository
     {
-        const string connectionString = @"Server=DESKTOP-29H7J25\SQLEXPRESS;Database=Stoke;Trusted_Connection=True;";
-        //ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private readonly string connectionString = DataContext.GetConnection();
 
         public IEnumerable<Estabelecimento> GetAll()
         {
@@ -34,7 +34,7 @@ namespace ApnCore_Crud.Repository
                 {
                     Estabelecimento estabelecimento = new Estabelecimento();
 
-                    estabelecimento.idEstabelecimento = Convert.ToInt32(rdr["idEstabelecimento"]);
+                    estabelecimento.IdEstabelecimento = Convert.ToInt32(rdr["IdEstabelecimento"]);
                     estabelecimento.NomeEstabelecimento = rdr["NomeEstabelecimento"].ToString();
                     estabelecimento.NomeFantasia = rdr["NomeFantasia"].ToString();
                     estabelecimento.Cep = rdr["Cep"].ToString();
@@ -89,7 +89,7 @@ namespace ApnCore_Crud.Repository
                     CommandTimeout = 60
                 };
 
-                cmd.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.idEstabelecimento);
+                cmd.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.IdEstabelecimento);
                 cmd.Parameters.AddWithValue("@NomeEstabelecimento", estabelecimento.NomeEstabelecimento);
                 cmd.Parameters.AddWithValue("@NomeFantasia", estabelecimento.NomeFantasia);
                 cmd.Parameters.AddWithValue("@Cep", estabelecimento.Cep);
@@ -107,7 +107,7 @@ namespace ApnCore_Crud.Repository
             }
         }
 
-        public Estabelecimento Get(int? id)
+        public Estabelecimento GetId(int? id)
         {
             Estabelecimento estabelecimento = new Estabelecimento();
 
@@ -119,26 +119,25 @@ namespace ApnCore_Crud.Repository
                     CommandTimeout = 60
                 };
 
+                cmd.Parameters.AddWithValue("@IdEstabelecimento", id);
+                cmd.Parameters.AddWithValue("@TipoConsulta", "PorId");
+
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    if (id == Convert.ToInt32(rdr["idEstabelecimento"]))
-                    {
-                        estabelecimento.idEstabelecimento = Convert.ToInt32(rdr["idEstabelecimento"]);
-                        estabelecimento.NomeEstabelecimento = rdr["NomeEstabelecimento"].ToString();
-                        estabelecimento.NomeFantasia = rdr["NomeFantasia"].ToString();
-                        estabelecimento.Cep = rdr["Cep"].ToString();
-                        estabelecimento.Endereco = rdr["Endereco"].ToString();
-                        estabelecimento.Numero = rdr["Numero"].ToString();
-                        estabelecimento.Bairro = rdr["Bairro"].ToString();
-                        estabelecimento.Uf = rdr["Uf"].ToString();
-                        estabelecimento.Cnpj = rdr["Cnpj"].ToString();
-                        estabelecimento.Email = rdr["Email"].ToString();
-                        estabelecimento.Telefone = rdr["Telefone"].ToString();
-                        break;
-                    }
+                    estabelecimento.IdEstabelecimento = Convert.ToInt32(rdr["IdEstabelecimento"]);
+                    estabelecimento.NomeEstabelecimento = rdr["NomeEstabelecimento"].ToString();
+                    estabelecimento.NomeFantasia = rdr["NomeFantasia"].ToString();
+                    estabelecimento.Cep = rdr["Cep"].ToString();
+                    estabelecimento.Endereco = rdr["Endereco"].ToString();
+                    estabelecimento.Numero = rdr["Numero"].ToString();
+                    estabelecimento.Bairro = rdr["Bairro"].ToString();
+                    estabelecimento.Uf = rdr["Uf"].ToString();
+                    estabelecimento.Cnpj = rdr["Cnpj"].ToString();
+                    estabelecimento.Email = rdr["Email"].ToString();
+                    estabelecimento.Telefone = rdr["Telefone"].ToString();
                 }
             }
             return estabelecimento;

@@ -11,7 +11,7 @@ namespace ApnCore_Crud.Repository.Interface
         IEnumerable<Usuario> GetAll();
         void Add(Usuario usuario);
         void Edit(Usuario usuario);
-        Usuario Get(int? id);
+        Usuario GetId(int? id);
         void Delete(int? id);
     }
 }

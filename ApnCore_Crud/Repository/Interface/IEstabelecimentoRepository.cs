@@ -11,7 +11,7 @@ namespace ApnCore_Crud.Repository.Interface
         IEnumerable<Estabelecimento> GetAll();
         void Add(Estabelecimento estabelecimento);
         void Edit(Estabelecimento estabelecimento);
-        Estabelecimento Get(int? id);
+        Estabelecimento GetId(int? id);
         void Delete(int? id);
     }
 }
