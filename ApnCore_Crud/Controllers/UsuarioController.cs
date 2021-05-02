@@ -22,23 +22,6 @@ namespace ApnCore_Crud.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Usuario usuario = _contextDAO.GetId(id);
-
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-            return View(usuario);
-        }
-
-        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -111,7 +94,5 @@ namespace ApnCore_Crud.Controllers
             _contextDAO.Delete(id);
             return RedirectToAction("Index");
         }
-
-
     }
 }

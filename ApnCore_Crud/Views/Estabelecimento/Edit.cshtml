@@ -69,15 +69,13 @@
                 <input asp-for="Telefone" class="form-control" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-success" />
+            <div class="form-group float-right">
+                <a class="btn btn-secondary" asp-action="Index">Voltar</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdEstabelecimento">Excluir</a>
+                <input class="btn btn-success" type="submit" value="Alterar" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Retornar para Lista</a>
 </div>
 
 @section Scripts {

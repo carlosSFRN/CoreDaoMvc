@@ -31,7 +31,8 @@ namespace ApnCore_Crud
 
             //cria a cada solicitação
             services.AddTransient<IEstabelecimentoRepository, EstabelecimentoRepository>();
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>(); 
+            services.AddTransient<IUsuarioEstabelecimentoRepository, UsuarioEstabelecimentoRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

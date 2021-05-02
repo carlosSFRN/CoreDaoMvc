@@ -1,0 +1,31 @@
+﻿@model ApnCore_Crud.Models.UsuarioEstabelecimento
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h2>Criar Usuario</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="IdEstabelecimento" class="control-label"></label>
+                <select asp-for="IdEstabelecimento" class="form-control" asp-items="@ViewBag.Estabelecimentos">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="form-group float-right">
+                <a class="btn btn-secondary" asp-controller="Usuario" asp-action="Index">Voltar</a>
+                <input class="btn btn-success" type="submit" value="Salvar" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -22,23 +22,6 @@ namespace ApnCore_Crud.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Estabelecimento estabelecimento = _contextDAO.GetId(id);
-
-            if (estabelecimento == null)
-            {
-                return NotFound();
-            }
-            return View(estabelecimento);
-        }
-
-        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -101,6 +84,7 @@ namespace ApnCore_Crud.Controllers
             {
                 return NotFound();
             }
+
             return View(estabelecimento);
         }
 

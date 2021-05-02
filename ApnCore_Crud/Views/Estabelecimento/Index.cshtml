@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Uf)
             </th>
             <th>
-
+                
             </th>
         </tr>
     </thead>
@@ -50,9 +50,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdEstabelecimento }) |
-                    @Html.ActionLink("Detalhes", "Details", new { id = item.IdEstabelecimento }) |
-                    @Html.ActionLink("Deletar", "Delete", new { id = item.IdEstabelecimento })
+                    <a asp-action="Edit" asp-route-id="@item.IdEstabelecimento" class="btn btn-block btn-outline-secondary"><span data-feather="edit"></span></a>
                 </td>
             </tr>
         }

@@ -50,9 +50,8 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdUsuario }) |
-                    @Html.ActionLink("Detalhes", "Details", new { id = item.IdUsuario }) |
-                    @Html.ActionLink("Deletar", "Delete", new { id = item.IdUsuario })
+                    <a asp-action="Edit" asp-route-id="@item.IdUsuario" class="btn btn-block btn-outline-secondary"><span data-feather="edit"></span></a>
+                    <a asp-controller="UsuarioEstabelecimento" asp-action="Index" asp-route-id="@item.IdUsuario" class="btn btn-block btn-outline-secondary">Adicionar Estabelecimento</a>
                 </td>
             </tr>
         }
