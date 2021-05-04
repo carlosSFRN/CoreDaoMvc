@@ -1,0 +1,363 @@
+﻿
+/****** Object:  Table [dbo].[Estabelecimento]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Estabelecimento](
+	[idEstabelecimento] [int] IDENTITY(1,1) NOT NULL,
+	[NomeEstabelecimento] [varchar](200) NOT NULL,
+	[NomeFantasia] [varchar](200) NOT NULL,
+	[Cep] [varchar](8) NOT NULL,
+	[Endereco] [varchar](200) NOT NULL,
+	[Numero] [varchar](10) NOT NULL,
+	[Bairro] [varchar](200) NOT NULL,
+	[Uf] [char](2) NOT NULL,
+	[Cnpj] [varchar](14) NOT NULL,
+	[Email] [varchar](200) NOT NULL,
+	[Telefone] [varchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idEstabelecimento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OperadorEstabelecimento]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OperadorEstabelecimento](
+	[idOperadorEstabelecimento] [int] IDENTITY(1,1) NOT NULL,
+	[idUsuario] [int] NOT NULL,
+	[idEstabelecimento] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idOperadorEstabelecimento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Usuario]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[idUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[NomeUsuario] [varchar](200) NOT NULL,
+	[Cpf] [varchar](11) NOT NULL,
+	[Email] [varchar](200) NOT NULL,
+	[Telefone] [varchar](20) NOT NULL,
+ CONSTRAINT [PK__Usuario__645723A6D75E58E7] PRIMARY KEY CLUSTERED 
+(
+	[idUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Estabelecimento] ON 
+GO
+INSERT [dbo].[Estabelecimento] ([idEstabelecimento], [NomeEstabelecimento], [NomeFantasia], [Cep], [Endereco], [Numero], [Bairro], [Uf], [Cnpj], [Email], [Telefone]) VALUES (1, N'Carlos Car 2', N'Carlos Car Ltda', N'59032410', N'rua maestro valdemar de almeida', N'71', N'alecrim', N'RN', N'54965303000178', N'carlos505monks@hotmail.com', N'84999166065')
+GO
+INSERT [dbo].[Estabelecimento] ([idEstabelecimento], [NomeEstabelecimento], [NomeFantasia], [Cep], [Endereco], [Numero], [Bairro], [Uf], [Cnpj], [Email], [Telefone]) VALUES (2, N'Auto Veiculos', N'Auto Veiculos ltda', N'59151710', N'Avenida dos Eucaliptos', N'269', N'Nova Parnamirim', N'RN', N'54566671000143', N'carlos505monks@hotmail.com', N'84999166065')
+GO
+INSERT [dbo].[Estabelecimento] ([idEstabelecimento], [NomeEstabelecimento], [NomeFantasia], [Cep], [Endereco], [Numero], [Bairro], [Uf], [Cnpj], [Email], [Telefone]) VALUES (3, N'Auto Car Veiculos', N'Auto Car Veiculos Ltda', N'59151710', N'Avenida dos Eucaliptos', N'269', N'Nova Parnamirim', N'RN', N'54965303000187', N'carlos505monks@hotmail.com', N'84999166065')
+GO
+SET IDENTITY_INSERT [dbo].[Estabelecimento] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OperadorEstabelecimento] ON 
+GO
+INSERT [dbo].[OperadorEstabelecimento] ([idOperadorEstabelecimento], [idUsuario], [idEstabelecimento]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[OperadorEstabelecimento] ([idOperadorEstabelecimento], [idUsuario], [idEstabelecimento]) VALUES (2, 1, 2)
+GO
+INSERT [dbo].[OperadorEstabelecimento] ([idOperadorEstabelecimento], [idUsuario], [idEstabelecimento]) VALUES (14, 2, 1)
+GO
+SET IDENTITY_INSERT [dbo].[OperadorEstabelecimento] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] ON 
+GO
+INSERT [dbo].[Usuario] ([idUsuario], [NomeUsuario], [Cpf], [Email], [Telefone]) VALUES (1, N'Carlos Eduardo', N'70235347418', N'carlos505monks@hotmail.com', N'84999166065')
+GO
+INSERT [dbo].[Usuario] ([idUsuario], [NomeUsuario], [Cpf], [Email], [Telefone]) VALUES (2, N'Jose Matias', N'58826236003', N'josematias@hotmail.com', N'84999166065')
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] OFF
+GO
+ALTER TABLE [dbo].[OperadorEstabelecimento]  WITH CHECK ADD FOREIGN KEY([idEstabelecimento])
+REFERENCES [dbo].[Estabelecimento] ([idEstabelecimento])
+GO
+ALTER TABLE [dbo].[OperadorEstabelecimento]  WITH CHECK ADD FOREIGN KEY([idUsuario])
+REFERENCES [dbo].[Usuario] ([idUsuario])
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Estabelecimento_Del]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Estabelecimento_Del] 
+(
+	@idEstabelecimento INT = NULL
+)
+AS
+	DELETE FROM Estabelecimento
+	WHERE idEstabelecimento = @idEstabelecimento
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Estabelecimento_Ins]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Estabelecimento_Ins] 
+(
+	@NomeEstabelecimento VARCHAR(200) = NULL,
+    @NomeFantasia VARCHAR(200) = NULL,
+    @Cep VARCHAR(8) = NULL,
+    @Endereco VARCHAR(200) = NULL,
+    @Numero VARCHAR(10) = NULL,
+    @Bairro VARCHAR(200) = NULL,
+    @Uf CHAR(2) = NULL,
+    @Cnpj VARCHAR(14) = NULL,
+    @Email VARCHAR(200) = NULL,
+    @Telefone VARCHAR(20) = NULL
+)
+AS
+		INSERT INTO Estabelecimento
+				(NomeEstabelecimento,
+				NomeFantasia,
+				Cep,
+				Endereco,
+				Numero,
+				Bairro,
+				Uf,
+				Cnpj,
+				Email,
+				Telefone)
+		 VALUES
+			   (@NomeEstabelecimento,
+				@NomeFantasia,
+				@Cep,
+				@Endereco,
+				@Numero,
+				@Bairro,
+				@Uf,
+				@Cnpj,
+				@Email,
+				@Telefone)
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Estabelecimento_Sel]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Estabelecimento_Sel] 
+(
+	@IdEstabelecimento INT = NULL,
+	@TipoConsulta VARCHAR(100) = NULL
+)
+AS
+
+	IF @TipoConsulta IS NULL
+	BEGIN
+		SELECT * 
+		FROM Estabelecimento (NOLOCK)
+	END
+	
+	IF @TipoConsulta = 'PorId'
+	BEGIN
+		SELECT * 
+		FROM Estabelecimento (NOLOCK)
+		WHERE idEstabelecimento = @IdEstabelecimento
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Estabelecimento_Upd]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Estabelecimento_Upd] 
+(
+	@idEstabelecimento INT = NULL,
+	@NomeEstabelecimento VARCHAR(200) = NULL,
+    @NomeFantasia VARCHAR(200) = NULL,
+    @Cep VARCHAR(8) = NULL,
+    @Endereco VARCHAR(200) = NULL,
+    @Numero VARCHAR(10) = NULL,
+    @Bairro VARCHAR(200) = NULL,
+    @Uf CHAR(2) = NULL,
+    @Cnpj VARCHAR(14) = NULL,
+    @Email VARCHAR(200) = NULL,
+    @Telefone VARCHAR(20) = NULL
+)
+AS
+	UPDATE Estabelecimento
+	SET
+		NomeEstabelecimento = @NomeEstabelecimento,
+		NomeFantasia = @NomeFantasia,
+		Cep = @Cep,
+		Endereco = @Endereco,
+		Numero = @Numero,
+		Bairro = @Bairro,
+		Uf = @Uf,
+		Cnpj = @Cnpj,
+		Email = @Email,
+		Telefone = @Telefone
+	WHERE idEstabelecimento = @idEstabelecimento
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Usuario_Del]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Usuario_Del] 
+(
+	@idUsuario INT = NULL
+)
+AS
+	DELETE FROM Usuario
+	WHERE idUsuario = @idUsuario
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Usuario_Ins]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Usuario_Ins] 
+(
+	@NomeUsuario VARCHAR(200) = NULL,
+    @Cpf VARCHAR(11) = NULL,
+    @Email VARCHAR(200) = NULL,
+    @Telefone VARCHAR(20) = NULL
+)
+AS
+		INSERT INTO Usuario
+				(NomeUsuario,
+				Cpf,
+				Email,
+				Telefone)
+		 VALUES
+			   (@NomeUsuario,
+				@Cpf,
+				@Email,
+				@Telefone)
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Usuario_Sel]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Usuario_Sel] 
+(
+	@IdUsuario INT = NULL,
+	@TipoConsulta VARCHAR(100) = NULL
+)
+AS
+	IF @TipoConsulta IS NULL
+	BEGIN
+		SELECT * 
+		FROM Usuario (NOLOCK)
+	END
+
+	IF @TipoConsulta = 'PorId'
+	BEGIN
+		SELECT * 
+		FROM Usuario (NOLOCK)
+		WHERE idUsuario = @IdUsuario
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[stp_Usuario_Upd]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_Usuario_Upd] 
+(
+	@idUsuario INT = NULL,
+	@NomeUsuario VARCHAR(200) = NULL,
+    @Cpf VARCHAR(11) = NULL,
+    @Email VARCHAR(200) = NULL,
+    @Telefone VARCHAR(20) = NULL
+)
+AS
+	UPDATE Usuario
+	SET
+		NomeUsuario = @NomeUsuario,
+		Cpf = @Cpf,
+		Email = @Email,
+		Telefone = @Telefone
+	WHERE idUsuario = @idUsuario
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_UsuarioEstabelecimento_Del]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_UsuarioEstabelecimento_Del] 
+(
+	@IdUsuarioEstabelecimento INT = NULL
+)
+AS
+	DELETE FROM OperadorEstabelecimento
+	WHERE idOperadorEstabelecimento = @IdUsuarioEstabelecimento
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_UsuarioEstabelecimento_Ins]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_UsuarioEstabelecimento_Ins] 
+(
+	@idEstabelecimento INT = NULL,
+    @idUsuario INT  = NULL
+)
+AS
+		INSERT INTO OperadorEstabelecimento
+				(idEstabelecimento,
+				idUsuario)
+		 VALUES
+			   (@idEstabelecimento,
+				@idUsuario)
+
+        
+GO
+/****** Object:  StoredProcedure [dbo].[stp_UsuarioEstabelecimento_Sel]    Script Date: 04/05/2021 00:33:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[stp_UsuarioEstabelecimento_Sel] 
+(
+	@IdUsuario INT = NULL,
+	@IdUsuarioEstabelecimento INT = NULL,
+	@TipoConsulta VARCHAR(100) = NULL
+)
+AS
+	IF @TipoConsulta IS NULL
+	BEGIN
+		SELECT * 
+		FROM OperadorEstabelecimento oe (NOLOCK)
+		INNER JOIN Estabelecimento e ON e.idEstabelecimento = oe.idEstabelecimento
+		WHERE IdUsuario = @IdUsuario
+	END
+
+	IF @TipoConsulta = 'PorIdUsuarioEstabelecimento'
+	BEGIN
+		SELECT * 
+		FROM OperadorEstabelecimento oe (NOLOCK)
+		INNER JOIN Estabelecimento e ON e.idEstabelecimento = oe.idEstabelecimento
+		WHERE idOperadorEstabelecimento = @IdUsuarioEstabelecimento
+	END
+
+GO
