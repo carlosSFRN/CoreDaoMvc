@@ -15,7 +15,7 @@ namespace ApnCore_Crud.Repository
     {
         private readonly string connectionString = DataContext.GetConnection();
 
-        public IEnumerable<UsuarioEstabelecimento> GetAll()
+        public IEnumerable<UsuarioEstabelecimento> GetAll(int id)
         {
             List<UsuarioEstabelecimento> listaUsuarioEstabelecimento = new List<UsuarioEstabelecimento>();
 
@@ -27,6 +27,8 @@ namespace ApnCore_Crud.Repository
                     CommandTimeout = 60
                 };
 
+                cmd.Parameters.AddWithValue("@IdUsuario", id);
+
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -34,8 +36,9 @@ namespace ApnCore_Crud.Repository
                 {
                     UsuarioEstabelecimento usuarioEstabelecimento = new UsuarioEstabelecimento
                     {
-                        IdUsuarioEstabelecimento = Convert.ToInt32(rdr["IdUsuarioEstabelecimento"]),
+                        IdUsuarioEstabelecimento = Convert.ToInt32(rdr["IdOperadorEstabelecimento"]),
                         IdEstabelecimento = Convert.ToInt32(rdr["IdEstabelecimento"]),
+                        NomeEstabelecimento = rdr["NomeEstabelecimento"].ToString(),
                         IdUsuario = Convert.ToInt32(rdr["IdEstabelecimento"])
                     };
 
@@ -81,14 +84,14 @@ namespace ApnCore_Crud.Repository
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("stp_Usuario_Ins", con)
+                SqlCommand cmd = new SqlCommand("stp_UsuarioEstabelecimento_Ins", con)
                 {
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 60
                 };
 
-                cmd.Parameters.AddWithValue("@NomeUsuario", usuarioEstabelecimento.IdEstabelecimento);
-                cmd.Parameters.AddWithValue("@Cpf", usuarioEstabelecimento.IdUsuario);
+                cmd.Parameters.AddWithValue("@IdEstabelecimento", usuarioEstabelecimento.IdEstabelecimento);
+                cmd.Parameters.AddWithValue("@IdUsuario", usuarioEstabelecimento.IdUsuario);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -105,9 +108,9 @@ namespace ApnCore_Crud.Repository
                     CommandTimeout = 60
                 };
 
-                cmd.Parameters.AddWithValue("@NomeUsuario", usuarioEstabelecimento.IdEstabelecimento);
-                cmd.Parameters.AddWithValue("@Cpf", usuarioEstabelecimento.IdUsuario);
-                cmd.Parameters.AddWithValue("@Cpf", usuarioEstabelecimento.IdUsuarioEstabelecimento);
+                cmd.Parameters.AddWithValue("@IdEstabelecimento", usuarioEstabelecimento.IdEstabelecimento);
+                cmd.Parameters.AddWithValue("@IdUsuario", usuarioEstabelecimento.IdUsuario);
+                cmd.Parameters.AddWithValue("@IdUsuarioEstabelecimento", usuarioEstabelecimento.IdUsuarioEstabelecimento);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -121,14 +124,14 @@ namespace ApnCore_Crud.Repository
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("stp_Usuario_Sel", con)
+                SqlCommand cmd = new SqlCommand("stp_UsuarioEstabelecimento_Sel", con)
                 {
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 60
                 };
 
-                cmd.Parameters.AddWithValue("@IdUsuario", id);
-                cmd.Parameters.AddWithValue("@TipoConsulta", "PorId");
+                cmd.Parameters.AddWithValue("@IdUsuarioEstabelecimento", id);
+                cmd.Parameters.AddWithValue("@TipoConsulta", "PorIdUsuarioEstabelecimento");
 
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
@@ -136,9 +139,9 @@ namespace ApnCore_Crud.Repository
                 while (rdr.Read())
                 {
                     usuarioEstabelecimento.IdUsuario = Convert.ToInt32(rdr["IdUsuario"]);
-                    usuarioEstabelecimento.IdEstabelecimento = Convert.ToInt32(rdr["NomeUsuario"]);
-                    usuarioEstabelecimento.NomeEstabelecimento = rdr["Cpf"].ToString();
-                    usuarioEstabelecimento.IdUsuarioEstabelecimento = Convert.ToInt32(rdr["Email"]);
+                    usuarioEstabelecimento.IdEstabelecimento = Convert.ToInt32(rdr["IdEstabelecimento"]);
+                    usuarioEstabelecimento.NomeEstabelecimento = rdr["NomeEstabelecimento"].ToString();
+                    usuarioEstabelecimento.IdUsuarioEstabelecimento = Convert.ToInt32(rdr["IdOperadorEstabelecimento"]);
                 }
             }
             return usuarioEstabelecimento;
@@ -147,13 +150,13 @@ namespace ApnCore_Crud.Repository
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("stp_Usuario_Del", con)
+                SqlCommand cmd = new SqlCommand("stp_UsuarioEstabelecimento_Del", con)
                 {
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 60
                 };
 
-                cmd.Parameters.AddWithValue("@idUsuario", id);
+                cmd.Parameters.AddWithValue("@IdUsuarioEstabelecimento", id);
 
                 con.Open();
                 cmd.ExecuteNonQuery();

@@ -8,7 +8,7 @@ namespace ApnCore_Crud.Repository.Interface
 {
     public interface IUsuarioEstabelecimentoRepository
     {
-        IEnumerable<UsuarioEstabelecimento> GetAll();
+        IEnumerable<UsuarioEstabelecimento> GetAll(int id);
         IEnumerable<UsuarioEstabelecimento> GetAllEstabelecimentos();
         void Add(UsuarioEstabelecimento usuarioEstabelecimento);
         void Edit(UsuarioEstabelecimento usuarioEstabelecimento);
