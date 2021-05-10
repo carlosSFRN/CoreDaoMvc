@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ApnCore_Crud.Models.Sistema>
+
+<div class="card mt-3">
+
+    <div id="heading-card-sistema" data-target="#collapse-card-sistema" data-toggle="collapse" aria-expanded="true" class="nav-link opentab card-header">
+        <a class="ml-3">
+            Sistemas
+            <span class="badge badge-secondary">Genérico</span>
+        </a>
+    </div>
+    <div id="collapse-card-sistema" class="collapse show" style="">
+        <div class="card-body">
+            <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                Incluir um novo sistema
+            </button>
+
+            <div class="table-responsive-xl">
+                <table class="table table-sm table-striped table-bordered table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Codigo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Caption)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Icone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Bloqueio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ordem)
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr class="table">
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Codigo)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Caption)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Icone)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Bloqueio)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ordem)
+                                    </td>
+
+                                    <td>
+                                        <button type="button" idsistema="4" captionsistema="Genérico" class="btn btn-sm btn-white js-ListaModulo">
+                                            Lista módulos
+                                        </button>
+
+                                        <button type="button" asp-route-id="@item.IdSistema" class="btn btn-sm btn-secondary">Editar</button>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

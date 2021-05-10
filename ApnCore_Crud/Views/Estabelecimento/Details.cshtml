@@ -1,0 +1,29 @@
+﻿@model ApnCore_Crud.Models.Estabelecimento
+
+@{
+    ViewData["Title"] = "Details";
+}
+<br />
+<h2>Detalhes</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEstabelecimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdEstabelecimento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeEstabelecimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NomeEstabelecimento)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdEstabelecimento }) |
+    <a asp-action="Index">Retornar para a Lista</a>
+</div>

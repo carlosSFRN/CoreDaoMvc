@@ -50,38 +50,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="Index" asp-controller="Home">
-                                <span data-feather="layout"></span>
-                                Painel
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="Index" asp-controller="Estabelecimento">
-                                <span data-feather="map-pin"></span>
-                                Estabelecimento
-                            </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Usuario" asp-action="Index">
-                                <span data-feather="users"></span>
-                                Usuario
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="MenuSistema" asp-action="Index">
-                                <span data-feather="users"></span>
-                                Menu Sistema
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </nav>
+            @await Component.InvokeAsync("Menu") 
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 

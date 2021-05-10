@@ -8,7 +8,7 @@ using ApnCore_Crud.Models;
 
 namespace ApnCore_Crud.Controllers
 {
-    public class HomeController : Controller
+    public class PainelController : Controller
     {
         public IActionResult Index()
         {

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ApnCore_Crud.Models.Sistema>
+
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="@item.Codigo">
+                            <span data-feather="@item.Icone"></span>
+                            @item.Caption
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+
+    </div>
+</nav>

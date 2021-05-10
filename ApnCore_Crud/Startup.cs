@@ -33,6 +33,8 @@ namespace ApnCore_Crud
             services.AddTransient<IEstabelecimentoRepository, EstabelecimentoRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>(); 
             services.AddTransient<IUsuarioEstabelecimentoRepository, UsuarioEstabelecimentoRepository>();
+            services.AddTransient<ISistemaRepository, SistemaRepository>();
+            services.AddTransient<IMenuSistemaRepository, MenuSistemaRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -46,7 +48,7 @@ namespace ApnCore_Crud
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Painel/Error");
             }
 
             app.UseStaticFiles();
@@ -56,7 +58,7 @@ namespace ApnCore_Crud
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Painel}/{action=Index}/{id?}");
             });
         }
     }
